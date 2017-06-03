@@ -1,1 +1,2 @@
-# blog
+# Blog
+A basic express and node app.
