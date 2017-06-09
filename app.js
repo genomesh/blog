@@ -3,8 +3,7 @@
 const express  = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-
-let myMessages = [];
+const fs = require('fs');
 
 const logins = [
     ['DavPop','xf64t'],
@@ -29,8 +28,10 @@ app.use(express.static('public', {root:__dirname}));
 
 app.post('/feedback', function (req, res) {
     let myFeedback = req.body;
-    console.log(myFeedback);
-    myMessages.push(myFeedback);
+    console.log(myFeedback.name + " submitted some feedback!");
+    fs.appendFile('feedback.txt', JSON.stringify(myFeedback) + "\n" , (err) => {
+        if (err) throw err;
+    });
 })
 
 app.post('/imagesRequest', function (req, res) {
