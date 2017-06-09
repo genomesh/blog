@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <script src="comments.js"></script>
+ <link type="text/css" rel="stylesheet" href="style.css">
+</head>
+<body>
+    <table>
+    <tr><td>
+        <button type="button" onclick="location.href='/'">Home</button>
+        <button type="button" onclick="location.href='/blog.html'">Blog</button>
+        <button type="button" onclick="location.href='/comments.html'">Feedback</button>
+    </td></tr>
+    <tr><td>
+    <h1>Feedback!</h1>
+    <p>Thanks for taking the time to post some CONSTRUCTIVE and HELPFUL feedback. Please enter your details and message below - we check our comments regularly!</p>
+    <table>
+    <tr>
+        <td class='feedback'>Name:</td>
+        <td><input type="text" id="name"></td>
+    </tr>
+    <tr>
+        <td class='feedback'>Email:</td>
+        <td><input type="email" id="email"></td>
+    </tr>
+    <tr>
+        <td class='feedback'>Comments:</td>
+        <td><textarea id="comment"></textarea></td>
+    </tr>
+    <tr>
+        <td><button type="button" onclick='submit()'>Submit</button></td>
+    </tr>
+    </table>
+    </td></tr>
+    </table>
+</body>
+</html>

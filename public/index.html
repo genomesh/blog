@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
- <script src="main.js"></script>
  <link type="text/css" rel="stylesheet" href="style.css">
 </head>
-<body onload="load()">
-    <label>Username: 
-        <input type="text" id="usr"/>
-    </label>
-    <label>Password: 
-        <input type="password" id="psw"/>
-    </label>
-    <button type='button' onclick="submit()">Login</button>
-    <p id='p2'>Server is down</p>
-    <br><img>
+<body>
+    <table>
+    <tr><td>
+        <button type="button" onclick="location.href='/'">Home</button>
+        <button type="button" onclick="location.href='/blog.html'">Blog</button>
+        <button type="button" onclick="location.href='/comments.html'">Feedback</button>
+    </td></tr>
+    <tr>
+    <td>
+    <h1>Welcome!</h1>
+    <p>We hope you enjoy your stay. Please navigate using the above buttons.</p>
+    </td>
+    </tr>
+    </table>
 </body>
 </html>

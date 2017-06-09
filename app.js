@@ -4,18 +4,20 @@ const express  = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 
+let myMessages = [];
+
 const logins = [
     ['DavPop','xf64t'],
     ['Techlord','tl2488'],
     ['Mibkins','MK12'],
     ['Zupkins','ZK12']
-]
+];
 
 const images = [
     ['img/png','/Resources/Amir.png',"Love that"],
     ['img/png','/Resources/Logo.png',"League Logo"],
     ['img/jpg','/Resources/Sexy.jpg',"Sexy Amir"]
-]
+];
 
 app.use(bodyParser.json());
 
@@ -25,9 +27,14 @@ app.set('port', (process.env.PORT || 3000));
 
 app.use(express.static('public', {root:__dirname}));
 
+app.post('/feedback', function (req, res) {
+    let myFeedback = req.body;
+    console.log(myFeedback);
+    myMessages.push(myFeedback);
+})
+
 app.post('/imagesRequest', function (req, res) {
     let numobj = req.body
-    console.log(numobj.img);
     res.setHeader('Content-Type', images[numobj.img][0]);
     res.sendFile(images[numobj.img][1], {root:__dirname});
 })
@@ -39,7 +46,6 @@ app.post('/login', function (req, res) {
     for (let c=0;c<logins.length;c++){
         if(usr === logins[c][0]) {
             if(psw === logins[c][1]) {
-                console.log("Access Granted");
                 res.setHeader('Content-Type', 'application/json');
                 let imgTitles = [];
                 for (let t=0;t<images.length;t++){
@@ -50,7 +56,6 @@ app.post('/login', function (req, res) {
             }
         }
     }
-    console.log("Access Denied");
 })
 
 app.get('/hits', function (req, res) {

@@ -22,30 +22,24 @@ function submit () {
     }).then(function(res) {
         return res.json();
     }).then(function(leJSON) {
-        urlme(leJSON)
+        for (let m=0;m<leJSON.length;m++) {
+            let head2 = new Headers();
+            head2.append('Content-Type', 'application/json');
+            fetch("/imagesRequest", {
+                method: "POST",
+                headers: head2,
+                body: JSON.stringify({img:m})
+            }).then(function(r){
+                return r.blob();
+            }).then(function (elBlob) {
+                let myImg = document.createElement('img');
+                let myDesc = document.createElement('p');
+                myDesc.innerHTML=leJSON[m];
+                let theURL = URL.createObjectURL(elBlob);
+                myImg.src = theURL;
+                document.body.insertBefore(myDesc, document.getElementById('p2'));
+                document.body.insertBefore(myImg, document.getElementById('p2'));
+            })
+        }
     });
-}
-
-function urlme (titleArray) {
-    console.log("start");
-    for (let m=0;m<titleArray.length;m++) {
-        console.log(m);
-        let head2 = new Headers();
-        head2.append('Content-Type', 'application/json');
-        fetch("/imagesRequest", {
-            method: "POST",
-            headers: head2,
-            body: JSON.stringify({img:m})
-        }).then(function(r){
-            return r.blob();
-        }).then(function (elBlob) {
-            let myImg = document.createElement('img');
-            let myDesc = document.createElement('p');
-            myDesc.innerHTML=titleArray[m];
-            console.log(theURL = URL.createObjectURL(elBlob));
-            myImg.src = theURL;
-            document.body.insertBefore(myDesc, document.getElementById('p2'))
-            document.body.insertBefore(myImg, document.getElementById('p2'))
-        })
-    }
 }
