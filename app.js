@@ -29,7 +29,7 @@ app.use(express.static('public', {root:__dirname}));
 app.post('/feedback', function (req, res) {
     let myFeedback = req.body;
     console.log(myFeedback.name + " submitted some feedback!");
-    fs.appendFile('feedback.txt', JSON.stringify(myFeedback) + "\n" , (err) => {
+    fs.appendFile('public/feedback.txt', JSON.stringify(myFeedback) + "\n" , (err) => {
         if (err) throw err;
     });
 })
