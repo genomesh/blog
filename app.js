@@ -4,6 +4,7 @@ const express  = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const path = require('path');
 
 const logins = [
     ['DavPop','xf64t'],
@@ -24,7 +25,7 @@ let hits = 0;
 
 app.set('port', (process.env.PORT || 3000));
 
-app.use(express.static('public', {root:__dirname}));
+app.use(express.static(path.join(__dirname,'public')));
 
 app.post('/feedback', function (req, res) {
     let myFeedback = req.body;
