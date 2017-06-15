@@ -7,11 +7,14 @@ function submit () {
         email:myEmail,
         comment:myComment
     };
+    document.getElementById('name').value='';
+    document.getElementById('email').value='';
+    document.getElementById('comment').value=''
     let myHeaders = new Headers();
     myHeaders.append('Content-Type','application/json');
     fetch("/feedback", {
         method: "POST",
         headers: myHeaders,
         body: JSON.stringify(myFeedback)
-    });
+    })
 }

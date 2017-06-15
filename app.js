@@ -9,8 +9,8 @@ const path = require('path');
 const logins = [
     ['DavPop','xf64t'],
     ['Techlord','tl2488'],
-    ['Mibkins','MK12'],
-    ['Zupkins','ZK12']
+    ['Weebse','IAmAWeeb'],
+    ['General','P4ssword']
 ];
 
 const images = [
@@ -30,15 +30,26 @@ app.use(express.static(path.join(__dirname,'public')));
 app.post('/feedback', function (req, res) {
     let myFeedback = req.body;
     console.log(myFeedback.name + " submitted some feedback!");
-    fs.appendFile('public/feedback.txt', JSON.stringify(myFeedback) + "\n" , (err) => {
+    fs.appendFile(path.join(__dirname,'public/feedback.txt'), JSON.stringify(myFeedback) + "\n" , (err) => {
         if (err) throw err;
     });
 })
 
 app.post('/imagesRequest', function (req, res) {
-    let numobj = req.body
-    res.setHeader('Content-Type', images[numobj.img][0]);
-    res.sendFile(images[numobj.img][1], {root:__dirname});
+    let loginObj1 = req.body;
+    console.log(loginObj1);
+    let usr1 = loginObj1.User;
+    let psw1 = loginObj1.Password;
+    let img = images[loginObj1.img];
+    for (let c=0;c<logins.length;c++){
+        if(usr1 === logins[c][0]) {
+            if(psw1 === logins[c][1]) {
+                res.setHeader('Content-Type', img[0]);
+                res.sendFile(img[1], {root:__dirname});
+                return;
+            }
+        }
+    }
 })
 
 app.post('/login', function (req, res) {

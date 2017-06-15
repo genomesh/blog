@@ -7,9 +7,10 @@ function load () {
 }
 
 function submit () {
-    myInfo = {
+    let myInfo = {
         User:document.getElementById('usr').value,
-        Password:document.getElementById('psw').value
+        Password:document.getElementById('psw').value,
+        img:0
     };
     document.getElementById('psw').value = "";
     let myHeaders = new Headers();
@@ -21,13 +22,14 @@ function submit () {
     }).then((res) => {
         return res.json();
     }).then((leJSON) => {
+        let head2 = new Headers();
+        head2.append('Content-Type', 'application/json');
         for (let m=0;m<leJSON.length;m++) {
-            let head2 = new Headers();
-            head2.append('Content-Type', 'application/json');
+            myInfo.img=m;
             fetch("/imagesRequest", {
                 method: "POST",
                 headers: head2,
-                body: JSON.stringify({img:m})
+                body: JSON.stringify(myInfo)
             }).then((r) => {
                 return r.blob();
             }).then((elBlob) => {
@@ -38,8 +40,9 @@ function submit () {
                 myImg.src = theURL;
                 document.body.insertBefore(myDesc, document.getElementById('p2'));
                 document.body.insertBefore(myImg, document.getElementById('p2'));
+            }).then(()=>{
+                if(m-1==leJSON.length) {myInfo={};}
             })
         }
-    });
-    myInfo={};
+    })
 }

@@ -12,7 +12,7 @@ img {
 p {
     font-size: 20px;
     text-align: center;
-    color: red
+    color: green
 }
 .feedback {
     font-size: 20px;
@@ -20,18 +20,19 @@ p {
 h1 {
     font-size: 40px;
     text-align: center;
-    color: red;
+    color: green;
 }
 input, textarea {
     width: 200px;
-    background-color: red;
-    border: 2px solid black
+    background-color: green;
+    border: 2px solid black;
+    font-family: monospace;
 }
 button {
-    color: red;
+    color: green;
     background-color: black;
-    border: 2px solid red;
+    border: 2px solid green;
 }
 label, td {
-    color: red;
+    color: green;
 }
